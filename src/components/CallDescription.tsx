@@ -1,41 +1,37 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
+import { ImageBackground } from 'react-native';
 import styled from 'styled-components/native';
 
 export default function CallDescription(props:any) {
-   const [questions] = useState([
-      { 
-         lang: "English", 
-         questions: [ "1- What is the meaning of the word “adoption”?", "2- Do you have a friend who was adopted as a child?", "3- Do you know anyone who has adopted a child?", "4- In your opinion, what is the main reason that makes people choose to adopt? Do you know any other reasons?", "5- What is the difference between domestic and international adoption?", "6- How is adoption seen in your country?", "7- What are the procedures for someone to adopt a child?", "8- How do you go about adopting a child" ]
-      },
-      { 
-         lang: "Arabic", 
-         questions: [ "1- ما معنى كلمة \"تبني\"؟", "2- هل لديك صديق تم تبنيه عندما كان طفلاً؟", "3- هل تعرف أي شخص تبنى طفلاً؟", "4- ما هو برأيك السبب الرئيسي الذي يجعل الناس يختارون التبني؟ هل تعرف أي أسباب أخرى؟", "5- ما هو الفرق بين التبني المحلي والدولي؟", "6- كيف يُنْظَرُ إلى التبني في بلدك؟", "7 ما هي الإجراءات لشخص يتبنى طفلاً؟", "8- كيف تتجه نحو تبني طفل؟" ]
-      }
+   const [matches] = useState([
+      { against: "Croatia", score: "0-0" },{ against: "Croatia", score: "0-0" },{ against: "Croatia", score: "0-0" },{ against: "Croatia", score: "0-0" },{ against: "Croatia", score: "0-0" }
    ])
    
 
    return (
       <Modal>
          <Container>
+         <ImageBackground source={require('../utils/siir_siir.jpeg')} style={{width: '100%', height: '100%'}}>
             <ModalHeader>
                <ModalHeaderText>
-                  <ModalTitle>Description</ModalTitle>
+                  <ModalTitle>🇲🇦 🇲🇦 🇲🇦 🇲🇦</ModalTitle>
                </ModalHeaderText>
             </ModalHeader>
-            <QuestionsView>
-               {questions.map((qtObject,i) => {
+            <MatchesView>
+               {matches.map((match,i) => {
                   return(
-                     <Fragment key={i}>
-                        <LanguageLabel>{qtObject.lang}</LanguageLabel>
-                        {qtObject.questions.map((qt,i) => {
-                           return(
-                              <Question key={i}>{qt}</Question>
-                           )
-                        })}
-                     </Fragment>
+                     <CallCard key={i}>
+                        <CardContainer>
+                           <CardBody>
+                              <Against>{match.against}</Against>
+                              <Score>{match.score}</Score>
+                           </CardBody>
+                        </CardContainer>
+                     </CallCard>
                   )
                })}
-            </QuestionsView>
+            </MatchesView>
+         </ImageBackground>
          </Container>
       </Modal>
    )
@@ -56,31 +52,49 @@ const ModalHeader = styled.View`
    flex-direction: row;
    border-bottom: 1px solid #FFFFFF;
    padding: 10px 10px;
+   margin-bottom: 20px;
 `
 const ModalHeaderText = styled.View`
    flex: 1;
    margin: 15px 0 10px;
 `
 const ModalTitle = styled.Text`
-   font-size: 18px;
+   font-size: 26px;
    font-weight: 600;
    color: #FFFFFF;
    text-align: center;
 `
-const QuestionsView = styled.ScrollView`
+const MatchesView = styled.ScrollView`
    flex: 1;
    padding: 0 15px;
 `
-const LanguageLabel = styled.Text`
-   font-size: 16px;
-   font-weight: bold;
-   color: #FFFFFF;
-   margin: 20px 0 10px;
-`
-const Question = styled.Text`
-   font-size: 16px;
-   font-weight: 400;
-   color: #FFFFFF;
-   line-height: 25px;
+const CallCard = styled.View`
+   width: 100%;
+   background-color: #FFFFFF;
+   border-radius: 30px;
+   overflow: hidden;
    margin-bottom: 15px;
+`
+const CardContainer = styled.View`
+   flex-direction: row;
+   align-items: flex-start;
+`
+const CardBody = styled.View`
+   width: 100%;
+   padding: 15px;
+   flex-direction: row;
+   justify-content: space-around;
+`
+const Against = styled.Text`
+   font-size: 20px;
+   font-weight: bold;
+   color: #5f6570;
+   text-align: center;
+   margin-right: 5px;
+`
+const Score = styled.Text`
+   font-size: 20px;
+   font-weight: 400;
+   color: #6d7c90;
+   text-align: center;
 `
