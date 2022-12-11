@@ -4,7 +4,11 @@ import styled from 'styled-components/native';
 
 export default function CallDescription(props:any) {
    const [matches] = useState([
-      { against: "Croatia", score: "0-0" },{ against: "Croatia", score: "0-0" },{ against: "Croatia", score: "0-0" },{ against: "Croatia", score: "0-0" },{ against: "Croatia", score: "0-0" }
+      { against: "🇵🇹  Portugal", score: "0-1" },
+      { against: "🇪🇸  Spain", score: "0-3" },
+      { against: "🇨🇦  Canada", score: "1-2" },
+      { against: "🇧🇪  Belgium", score: "0-2" },
+      { against: "🇭🇷  Croatia", score: "0-0" }
    ])
    
 
@@ -14,7 +18,7 @@ export default function CallDescription(props:any) {
          <ImageBackground source={require('../utils/siir_siir.jpeg')} style={{width: '100%', height: '100%'}}>
             <ModalHeader>
                <ModalHeaderText>
-                  <ModalTitle>🇲🇦 🇲🇦 🇲🇦 🇲🇦</ModalTitle>
+                  <ModalTitle>🇲🇦 🇲🇦 🥑 🇲🇦 🇲🇦</ModalTitle>
                </ModalHeaderText>
             </ModalHeader>
             <MatchesView>
