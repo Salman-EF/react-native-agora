@@ -241,7 +241,7 @@ export default class CallViewScreen extends Component<{}, State> {
             {this.renderAudioCards()}
             </CardsRow>
             <DescButtonContainer>
-               <DescButton onPress={this.toggleDescModal}><DescButtonText>Description </DescButtonText><MaterialIcons name="keyboard-arrow-up" size={26} color="#7F7F7F" /></DescButton>
+               <DescButton onPress={this.toggleDescModal}><DescButtonText>سييير سييير </DescButtonText><MaterialIcons name="keyboard-arrow-up" size={26} color="#7F7F7F" /></DescButton>
             </DescButtonContainer>
             <Modalize ref={this.chatModalRef} modalStyle={{ flex: 1 }}
                scrollViewProps={{ contentContainerStyle: { height: '100%' }, keyboardShouldPersistTaps: "always" }} withHandle={false}
