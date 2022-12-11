@@ -4,6 +4,60 @@ import styled from "styled-components/native"
 import ChatInput from "./ChatInput";
 import { ScrollView } from "react-native";
 
+export default function CallChat(props:any) {
+   const [chat, updateChat] = useState(new Array());
+   const ChatContainerRef = useRef<ScrollView>();
+
+   useEffect(() => {
+      // ChatContainerRef.current?.scrollToEnd();
+   })
+   
+   const sendMessage = (msg:string) => {
+      const now = new Date().toLocaleDateString() +' at '+ new Date().toLocaleTimeString()
+      const chatCard = { sender: 'You', msg: msg , time: now };
+      const chatCard1 = { sender: 'Remote', msg: msg , time: now };
+      updateChat([...chat, chatCard, chatCard1]);
+      ChatContainerRef.current?.scrollToEnd();
+   }
+   
+   return (
+      <Modal>
+         <Container>
+            <ModalHeader>
+               <ModalHeaderText>
+                  <ModalTitle>{props.groupcall.title}</ModalTitle>
+                  <ModalSubTitle>Started 2:00 AM, Dec 09 2021</ModalSubTitle>
+               </ModalHeaderText>
+               <MaterialIcons name="keyboard-arrow-down" size={32} color="#FFFFFF" onPress={props.toggleChatModal} />
+            </ModalHeader>
+            <ChatContainer ref={ChatContainerRef}>
+               {chat.map((chatObj:chatObject, i) => {
+                  return(
+                     chatObj.sender == 'You' ? (
+                        <ChatCardContainer key={i}>
+                        <ChatCard sender >
+                           <ChatCardMsg>{chatObj.msg}</ChatCardMsg>
+                           <ChatCardTime>{chatObj.time}</ChatCardTime>
+                        </ChatCard>
+                        </ChatCardContainer>
+                     ) : (
+                        <ChatCardContainer key={i}>
+                        <ChatCard receiver >
+                           <ChatCardName>{chatObj.sender}</ChatCardName>
+                           <ChatCardMsg>{chatObj.msg}</ChatCardMsg>
+                           <ChatCardTime>{chatObj.time}</ChatCardTime>
+                        </ChatCard>
+                        </ChatCardContainer>
+                     )
+                  )
+               })}
+            </ChatContainer>
+            <ChatInput sendMessage={sendMessage} />
+         </Container>
+      </Modal>
+   )  
+}
+
 const Modal = styled.View`
    flex: 1;
    background-color: transparent;
@@ -73,59 +127,4 @@ interface chatObject {
    sender: string,
    msg: string,
    time: string
-}
-
-export default function CallChat(props:any) {
-   const [chat, updateChat] = useState(new Array());
-   const ChatContainerRef = useRef<ScrollView>();
-
-   useEffect(() => {
-      // ChatContainerRef.current?.scrollToEnd();
-   })
-   
-   const sendMessage = (msg:string) => {
-      const now = new Date().toLocaleDateString() +' at '+ new Date().toLocaleTimeString()
-      const chatCard = { sender: 'You', msg: msg , time: now };
-      const chatCard1 = { sender: 'Remote', msg: msg , time: now };
-      updateChat([...chat, chatCard, chatCard1]);
-      ChatContainerRef.current?.scrollToEnd();
-   }
-   
-   return (
-      <Modal>
-         <Container>
-            <ModalHeader>
-               <ModalHeaderText>
-                  <ModalTitle>{props.groupcall.title}</ModalTitle>
-                  <ModalSubTitle>Started 2:00 AM, Dec 09 2021</ModalSubTitle>
-               </ModalHeaderText>
-               <MaterialIcons name="keyboard-arrow-down" size={32} color="#FFFFFF" onPress={props.toggleChatModal} />
-            </ModalHeader>
-            <ChatContainer ref={ChatContainerRef}>
-               {chat.map((chatObj:chatObject, i) => {
-                  return(
-                     chatObj.sender == 'You' ? (
-                        <ChatCardContainer key={i}>
-                        <ChatCard sender >
-                           <ChatCardMsg>{chatObj.msg}</ChatCardMsg>
-                           <ChatCardTime>{chatObj.time}</ChatCardTime>
-                        </ChatCard>
-                        </ChatCardContainer>
-                     ) : (
-                        <ChatCardContainer key={i}>
-                        <ChatCard receiver >
-                           <ChatCardName>{chatObj.sender}</ChatCardName>
-                           <ChatCardMsg>{chatObj.msg}</ChatCardMsg>
-                           <ChatCardTime>{chatObj.time}</ChatCardTime>
-                        </ChatCard>
-                        </ChatCardContainer>
-                     )
-                  )
-               })}
-            </ChatContainer>
-            <ChatInput sendMessage={sendMessage} />
-         </Container>
-      </Modal>
-   )
-   
 }

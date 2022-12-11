@@ -8,54 +8,6 @@ export default function CallFooter(props:any) {
    const state = {
    };
    
-   const Container = styled.View`
-      padding: 10px 15px 20px;
-   `
-   const FooterButtonsContainer = styled.View`
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-   `
-   const JoinButton = styled.TouchableOpacity`
-      padding: 5px 15px;
-      background-color: #4DB6AC;
-      border-radius: 50px;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-   `
-   const JoinButtonText = styled.Text`
-      font-size: 22px;
-      font-weight: bold;
-      color: #ffffff;
-   `
-   const ButtonsContainer = styled.View`
-      flex-direction: row;
-      align-items: center;
-   `
-   const CallButton = styled.TouchableOpacity`
-      width: 42px;
-      height: 42px;
-      margin-right: 15px;
-      background-color: #D9D9D9;
-      border-radius: 50px;
-      justify-content: center;
-      align-items: center;
-   `
-   const LeaveButton = styled.TouchableOpacity`
-      padding: 5px 15px;
-      background-color: #CB231E;
-      border-radius: 50px;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-   `
-   const LeaveButtonText = styled.Text`
-      font-size: 16px;
-      font-weight: 600;
-      color: #ffffff;
-   `
-   
    if(props.isJoined) {
       return (
          // <LinearGradient colors={['#202124', '#000000']}>
@@ -79,4 +31,52 @@ export default function CallFooter(props:any) {
          // </LinearGradient>
       )
    }
- }
+}
+   
+const Container = styled.View`
+   padding: 10px 15px 20px;
+`
+const FooterButtonsContainer = styled.View`
+   flex-direction: row;
+   align-items: center;
+   justify-content: space-between;
+`
+const JoinButton = styled.TouchableOpacity`
+   padding: 5px 15px;
+   background-color: #4DB6AC;
+   border-radius: 50px;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+`
+const JoinButtonText = styled.Text`
+   font-size: 22px;
+   font-weight: bold;
+   color: #ffffff;
+`
+const ButtonsContainer = styled.View`
+   flex-direction: row;
+   align-items: center;
+`
+const CallButton = styled.TouchableOpacity`
+   width: 42px;
+   height: 42px;
+   margin-right: 15px;
+   background-color: #D9D9D9;
+   border-radius: 50px;
+   justify-content: center;
+   align-items: center;
+`
+const LeaveButton = styled.TouchableOpacity`
+   padding: 5px 15px;
+   background-color: #CB231E;
+   border-radius: 50px;
+   flex-direction: row;
+   justify-content: center;
+   align-items: center;
+`
+const LeaveButtonText = styled.Text`
+   font-size: 16px;
+   font-weight: 600;
+   color: #ffffff;
+`

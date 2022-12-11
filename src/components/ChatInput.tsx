@@ -2,31 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components/native';
 import { MaterialIcons } from '@expo/vector-icons';
 import { TextInput } from 'react-native';
-      
-const Container = styled.View`
-   overflow: hidden;
-   padding: 10px 10px;
-   flex-direction: row;
-   align-items: flex-end;
-`
-const MessageInput = styled.TextInput.attrs({ placeholderTextColor: '#D9D9D9' })`
-   flex: 1;
-   background-color: #5F5F5F;
-   color: #FFFFFF;
-   overflow: hidden;
-   padding: 8px 20px;
-   border-radius: 26px;
-   font-size: 18px;
-   font-weight: 400;
-   line-height: 20px;
-   margin-right: 5px;
-`   
-const SendIconContainer = styled.TouchableOpacity.attrs((props: {disabled:boolean}) => props)`
-   padding: 10px;
-   border: 1px solid ${(props) => props.disabled ? '#458e8385':'#458e83'};
-   border-radius: 50px;
-   background-color: ${(props) => props.disabled ? 'transparent':'#458e83'};
-`
 
 export default function ChatInput(props:any) {
    const [message, setMessage] = useState('');
@@ -62,3 +37,28 @@ export default function ChatInput(props:any) {
       </Container>
    )
 }
+      
+const Container = styled.View`
+   overflow: hidden;
+   padding: 10px 10px;
+   flex-direction: row;
+   align-items: flex-end;
+`
+const MessageInput = styled.TextInput.attrs({ placeholderTextColor: '#D9D9D9' })`
+   flex: 1;
+   background-color: #5F5F5F;
+   color: #FFFFFF;
+   overflow: hidden;
+   padding: 8px 20px;
+   border-radius: 26px;
+   font-size: 18px;
+   font-weight: 400;
+   line-height: 20px;
+   margin-right: 5px;
+`   
+const SendIconContainer = styled.TouchableOpacity.attrs((props: {disabled:boolean}) => props)`
+   padding: 10px;
+   border: 1px solid ${(props) => props.disabled ? '#458e8385':'#458e83'};
+   border-radius: 50px;
+   background-color: ${(props) => props.disabled ? 'transparent':'#458e83'};
+`

@@ -9,8 +9,8 @@ export default function ParticipantCard(props:any) {
          image: 'https://avatars.githubusercontent.com/u/23010997?s=120'
       }
    };
-   
-   const ParticipantCard = styled.View`
+
+   const Card = styled.View`
       width: 33.33%;
       margin-bottom: 20px;
       justify-content: center;
@@ -44,7 +44,7 @@ export default function ParticipantCard(props:any) {
    `
    
    return (
-      <ParticipantCard>
+      <Card>
          <View>
             <ParticipantImageContainer>
                <ParticipantImage source={{uri:state.participant.image}} />
@@ -54,6 +54,6 @@ export default function ParticipantCard(props:any) {
             </ParticipantMic>
          </View>
          <ParticipantName>{props.uid}</ParticipantName>
-      </ParticipantCard>
+      </Card>
    );
- }
+}
