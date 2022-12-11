@@ -15,7 +15,7 @@ export default function CallDescription(props:any) {
    return (
       <Modal>
          <Container>
-         <ImageBackground source={require('../utils/siir_siir.jpeg')} style={{width: '100%', height: '100%'}}>
+         <ImageBackground source={require('../../assets/siir_siir.jpeg')} style={{width: '100%', height: '100%'}}>
             <ModalHeader>
                <ModalHeaderText>
                   <ModalTitle>🇲🇦 🇲🇦 🥑 🇲🇦 🇲🇦</ModalTitle>
