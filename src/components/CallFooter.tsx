@@ -1,5 +1,4 @@
 import React from "react"
-import LinearGradient from 'expo-linear-gradient';
 import styled from "styled-components/native";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { MaterialIcons } from '@expo/vector-icons';
@@ -10,7 +9,6 @@ export default function CallFooter(props:any) {
    
    if(props.isJoined) {
       return (
-         // <LinearGradient colors={['#202124', '#000000']}>
          <Container>
             <FooterButtonsContainer>
                <ButtonsContainer>
@@ -20,15 +18,12 @@ export default function CallFooter(props:any) {
                <LeaveButton onPress={props.leave}><MaterialIcons name="call-end" size={26} color="#ffffff" /><LeaveButtonText>  Leave</LeaveButtonText></LeaveButton>
             </FooterButtonsContainer>
          </Container>
-         // </LinearGradient>
       );
    } else {
       return (
-         // <LinearGradient colors={['#202124', '#000000']}>
          <Container>
                <JoinButton onPress={props.join}><JoinButtonText>Join</JoinButtonText></JoinButton>
          </Container>
-         // </LinearGradient>
       )
    }
 }
