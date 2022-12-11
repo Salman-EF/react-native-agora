@@ -76,34 +76,36 @@ export default class CallViewScreen extends Component<{}, State> {
 
    initEngine = async () => {
       this.agoraEngine = await createAgoraRtcEngine();
-      this.agoraEngine.initialize({appId: this.state.appId});
       await this.addListeners();
-   
+      this.agoraEngine.initialize({
+         appId: this.state.appId,
+         channelProfile: ChannelProfileType.ChannelProfileCommunication
+     });
       await this.agoraEngine.enableAudio();
-      await this.agoraEngine.setChannelProfile(ChannelProfileType.ChannelProfileLiveBroadcasting);
-      await this.agoraEngine.setClientRole(ClientRoleType.ClientRoleBroadcaster);
    };
  
    addListeners = () => {
-      this.agoraEngine?.addListener('onUserJoined', (conn, uid, elapsed) => {
-         const {participants} = this.state
-         participants.push({ uid: uid.toString(), talking: false, muted: false })
-         this.setState({ participants })
+      this.agoraEngine?.registerEventHandler({
+         onUserJoined: (conn, uid, elapsed) => {
+            const {participants} = this.state
+            participants.push({ uid: uid.toString(), talking: false, muted: false })
+            this.setState({ participants })
+         },
+         onUserOffline: (conn, uid, reason) => {
+            let {participants} = this.state
+            participants = participants.filter(part => part.uid != uid.toString());
+            this.setState({ participants })
+         },
+         onError: (errorCode, msg) => {
+            console.info('Error', errorCode);
+         },
+         onJoinChannelSuccess: (conn, elapsed) => {
+            this.setState({ isJoined: true });
+         },
+         onLeaveChannel: (stats) => {
+            this.setState({ participants: [], isJoined: false, muted: false })
+         }
       })
-      this.agoraEngine?.addListener('onUserOffline', (conn, uid, reason) => {
-         let {participants} = this.state
-         participants = participants.filter(part => part.uid != uid.toString());
-         this.setState({ participants })
-      })
-      this.agoraEngine?.addListener('onError', (errorCode, msg) => {
-         console.info('Error', errorCode);
-      });
-      this.agoraEngine?.addListener('onJoinChannelSuccess', (conn, elapsed) => {
-         this.setState({ isJoined: true });
-      });
-      this.agoraEngine?.addListener('onLeaveChannel', (stats) => {
-         this.setState({ participants: [], isJoined: false, muted: false })
-      });
 
       // Speaker detection
       this.agoraEngine?.enableAudioVolumeIndication(1000, 3, true);
@@ -190,7 +192,7 @@ export default class CallViewScreen extends Component<{}, State> {
          body: formdata
       };
 
-      await fetch(`${Config.API_BASE_URL}/`, fetchOptions)
+      await fetch(`${Config.API_BASE_URL}/agora_generate_token`, fetchOptions)
          .then(response => response.json())
          .then(res => {
             if (res.status == 1) this.setState({ token: res.token })
@@ -201,7 +203,7 @@ export default class CallViewScreen extends Component<{}, State> {
    joinChannel = async () => {
       try {
          await this.generateAgoraToken();
-         await this.agoraEngine?.joinChannel(this.state.token,this.state.channelName,this.state.uId,null)
+         await this.agoraEngine?.joinChannel(this.state.token,this.state.channelName,this.state.uId,{})
          // After the user joined the screen should not sleep
          activateKeepAwake();
       } catch (err) {
