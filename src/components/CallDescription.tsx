@@ -4,6 +4,8 @@ import styled from 'styled-components/native';
 
 export default function CallDescription(props:any) {
    const [matches] = useState([
+      { against: "🇭🇷  Croatia", score: "2-1" } ,
+      { against: "🇫🇷  France", score: "2-0" } ,
       { against: "🇵🇹  Portugal", score: "0-1" },
       { against: "🇪🇸  Spain", score: "0-3" },
       { against: "🇨🇦  Canada", score: "1-2" },
